@@ -10,8 +10,7 @@ on:
 jobs:
   terraform:
     runs-on: [self-hosted, linux, APPE]
-    env:
-      GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
+   
     steps: 
        - name: Checkout
          uses: actions/checkout@v2  
@@ -29,9 +28,9 @@ jobs:
        - name: Configure AWS Credentials
          uses: aws-actions/configure-aws-credentials@v1
          with:
-           aws-access-key-id: ${{ secrets.TEST_AWS_ACCESS_KEY_ID }}
-           aws-secret-access-key: ${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}
-           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+           aws-access-key-id: AKIAR6JTCWYJYT3YSTG7
+           aws-secret-access-key: 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
+          # aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
            aws-region: us-east-1
 
        - name: Run Terraform init
