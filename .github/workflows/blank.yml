@@ -1,0 +1,41 @@
+name: Terraform Apply
+
+on:
+  push:
+    branches:
+      - main
+      - modules/**
+      
+
+jobs:
+  terraform:
+    runs-on: [self-hosted, linux, APPE]
+   
+    steps: 
+       - name: Checkout
+         uses: actions/checkout@v2  
+       - name: Terraform Version
+         id: version
+         run: |
+          terraform -v
+       #- name: configure aws credentials
+       #  uses: fuller-inc/actions-aws-assume-role@v1
+       #  with:
+       #   role-to-assume: 
+       #   #role-session-name: terraform-gs
+       #   aws-region: us-east-1
+
+       - name: Configure AWS Credentials
+         uses: aws-actions/configure-aws-credentials@v1
+         with:
+           aws-access-key-id: AKIAR6JTCWYJYT3YSTG7
+           aws-secret-access-key: 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
+          # aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+           aws-region: us-east-1
+
+       - name: Run Terraform init
+         run: terraform init
+      
+       - name: Run Terraform Apply
+         run: terraform apply -auto-approve
+         #continue-on-error: true
